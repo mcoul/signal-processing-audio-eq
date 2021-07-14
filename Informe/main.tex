@@ -1,0 +1,43 @@
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}		% Configuro la codificación
+\input{config.tex}				% Archivo con los comandos globales como Título y autores
+\input{preamble.tex}
+\input{aux_functions.tex}		% Se proveen un conjunto de funciones extras
+
+% Defino el path de los includegraphics
+\graphicspath{{./Figuras/}}		% Directorio que contiene los graficos
+
+% Defino el path para los input de .tex y de .eps
+\makeatletter
+\def\input@path{{./Figuras/}{./Secciones/}{./Cover_page/}}
+\makeatother
+
+% Defino el path del listings
+\ifListings
+%% Cambiar el nombre de la carpeta si se utilizan Listings
+	\lstinputpath{{../Octave/}}
+\fi
+
+
+
+\begin{document}
+		% Carátula (formal o simple,_formal o _simple respectivamente) con Resumen
+		% incluido e Índice (si es necesario configurar en config.tex) del informe
+		\input{cover_formal.tex}
+	\setcounter{page}{1}
+
+	\section{Especificaciones}\label{sec:specs}
+		\input{1_especificaciones.tex}
+		
+	\section{Parte I: Ecualización mediante filtros de fase lineal}\label{sec:partei}
+		\input{2_partei.tex}
+
+	\section{Parte II: Ecualización mediante filtros de fase no lineal}\label{sec:parteii}
+                \input{3_parteii.tex}
+                
+    \section{Audios de prueba y conclusiones}\label{sec:audios}
+                \input{4_audios.tex}
+	
+	%\appendix
+\end{document}

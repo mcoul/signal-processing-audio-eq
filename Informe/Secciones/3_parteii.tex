@@ -1,0 +1,66 @@
+En esta parte se utilizan técnicas basadas en filtros IIR para el diseño del ecualizador.
+{\color{red}{MMM medio figaza ésto pareciera}}
+
+\subsection{Filtro IIR}
+
+%A partir de la respuesta impulsiva del sistema h[n] suministrada, se pide obtener un ecualizador HEQ(ejw) mediante un filtro que compense la respuesta en frecuencia en módulo del sistema EA implementando su sistema inverso, pero al mismo tiempo garantizando las condiciones de estabilidad. Qué tipo de sistemas resultarán de utilidad para este n? Dado que en este caso el filtro se obtiene directamente en función del sistema a compensar, no es necesario definir tolerancias ni especificaciones del mismo.
+
+
+
+\subsubsection{Ítem a: transferencia del ecualizador} \label{sec:221a}
+
+	Para que el sistema inverso compensador sea estable, el sistema distorsionador (en nuestro caso, el sistema electroacústico) debe ser estable. Dicha compensación es posible sólo si el sistema EA es de fase mínima.\\
+
+	Suponiendo que el sistema EA tiene función de transferencia racional, se puede descomponer en el producto de una de fase mínima y otra pasa todo. Dado que la respuesta impulsiva es de longitud finita, los polos del sistema se encuentran en el origen o en el infinito. Siendo $n$ la cantidad de ceros del sistema, éste se puede escribir como: 
+		
+		\begin{equation}
+			H_{EA}(z) = \prod^n_{k=1} \frac{1-c_k z^{-1}}{1} 
+			\label{eq:prod_hea}
+		\end{equation}
+	
+		El sistema de fase mínima se puede formar a partir de los ceros que se encuentran dentro del círculo unitario y de la reflexión de los que se encuentran fuera a su posición inversa conjugada (siendo ésta en el interior de $|z|<1$). De la ecuación \eqref{eq:prod_hea}, con $m$ ceros tal que $|c_k|>1$, se obtiene:
+
+		\begin{equation*}
+			H_{min}(z) = \prod^{n-m-1}_{k=1} \frac{1-c_k z^{-1}}{1} \cdot \prod^{n}_{k=n-m} c_{k} \cdot \frac{1-\overline{c_k^{-1}} z^{-1}}{1}
+		\end{equation*}
+
+	Así, con $H_{EA}(z) = H_{min}(z) \cdot H_{ap}(z)$, se define al sistema ecualizador como:
+
+		\begin{equation*}
+			H_{IIR}(z)  = \frac{1}{H_{min}(z)}
+		\end{equation*}
+
+	De esta forma, el sistema total $H_{total}(z)$ resulta:
+		\begin{align*}
+			H_{total}(z) &= H_{IIR}(z) \cdot H_{EA}\\
+			H_{total}(z) &= H_{ap}(z)\\
+			\Rightarrow |H_{total}(z)| &= |H_{ap}(z)| = 1
+		\end{align*}
+
+
+\subsubsection{Ítem b: diagrama de polos y ceros}
+
+	\graficarEPS{0.6}{graf_P21b_HEQ}{Filtro ecualizador.}{fig:P21b_HEQ}
+	\graficarEPS{0.6}{graf_P21b_HEA}{Sistema electroacústico.}{fig:P21b_HEA}
+	\graficarEPS{0.6}{graf_P21b_HT}{Sistema total.}{fig:P21b_HT}
+	
+	Como se puede ver en la Figura \ref{fig:P21b_HEQ} el ecualizador tiene todos los polos dentro del círculo unitario, asegurando la estabilidad del filtro. Finalmente, en la Figura \ref{fig:P21b_HT}, se encuentra la misma configuración de ceros del sistema electroacústico (Figura \ref{fig:P21b_HEA}) con la respectiva cancelación dada por el filtro ecualizador. Así la respuesta en módulo del sistema final es constantemente 1.
+
+\subsubsection{Ítem c: respuesta en frecuencia}
+
+	\graficarEPS{0.5}{graf_P21c_rta_frec}{Módulo de la respuesta en frecuencia del filtro, sistema electroacústico y el sistema total.}{fig:21c_rta_frecuencia}
+
+	Del análisis de la Figura \ref{fig:21c_rta_frecuencia} se puede concluir que el filtro diseñado cumple el requerimiento de compensar el sistema original, logrando que la respuesta final del sistema sea plana. Esto se debe a que la respuesta en frecuencia del mismo es exactamente inversa a la del sistema electroacústico. 
+	
+	Sin embargo, al graficar únicamente el módulo de la transferencia total como se hace en la Figura \ref{fig:P21c_rta_total}, se aprecia un error menor a $\pm \SI{0.003}{\dB}$. Se desconocen las causas del mismo, dado que no se puede atribuir a un error numérico, porque éste debería ser del orden de \num{e-12} o menor. Restaría descartar la implementación de las funciones utilizadas en la pequeña porción de código generado para el cálculo del filtro. 
+
+	\graficarEPS{0.5}{graf_P21c_rta_tot}{Módulo en \si{\dB} de la transferencia total.}{fig:P21c_rta_total}
+
+%	% Se cumple el requerimiento estipulado inicialmente?
+%	
+
+\subsubsection{Ítem d: retardo de fase}
+
+	\graficarEPS{0.6}{graf_P21d_retardo_fase}{Retardo de fase que introduce el filtro ecualizador, el sistema EA y el sistema total.}{fig:P21d_retardo_fase}
+
+	A diferencia de los filtros \emph{FIR FLG} y de cuadrados mínimos, el retardo de fase introducido por el filtro es distinto de una constante. Más precisamente, no es lineal. A partir de los cálculos realizados en la Sección \ref{sec:221a} que concluyen que el sistema total se comporta como $H_{ap}(z)$, se determina que la fase del filtro es similar a $H_{ap}(z)$ dado que el retardo del sistema sin compensar no varía más de $\pm 8$ muestras. Sin embargo, el sistema final tiene variaciones de aproximadamente 20 muestras al igual que el filtro.

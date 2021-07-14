@@ -1,0 +1,29 @@
+	Una vez diseñado y caracterizado cada filtro, se utilizan distintos fragmentos de canciones como posibles señales de prueba que podría entregarle el sistema electroacústico al ecualizador. A través de cinco audios de características y géneros muy diversos, se realizan observaciones sobre la efectividad de cada filtro diseñado para poder reproducirlos como se desearía escucharlos. Las observaciones son tanto subjetivas como objetivas.
+	
+	\subsection{Audio 1: \emph{Get Lucky - Daft Punk}}
+	
+%	Cuando pasaa por el EA, el bajo se escucha similar, al igual que la guitarra. Sin embargo, lo que más se ve alterado es la voz principal y los coros. El filtro FLG es el que más se acerca a replicar al original. El que resulta de la utilización del filtro de fase no lineal se encuentra distorsinado por fase fuertemente. Ésta distorsión se ve al escuchar los coros cuando dice \emph{"(...) who we are"}. Las voces de los coros se encuentran más distanciadas de la principal, resultando en un canon más que en un efecto de coro/eco que es el que se escucha en la pista original. En cuanto al diseñado por cuadrados mínimos, se encuentra un leve desplazamiento de dichos coros, pero es imperceptible si no estuviese bajo análisis riguroso.
+	La distorsión introducida por el sistema electroacústico se presenta principalmente en las voces y coros, siendo las guitarras y bajos bastante similares a la original. Los filtros de fase lineal replican con bastante fidelidad la porción de audio original y a opinión personal el filtro por ventaneo es mejor. Ésto puede deberse al sobrepico presente en el de cuadrados mínimos, pero es imperceptible la diferencia si se tuviesen las pistas por separado sin saber cómo fueron generadas. Por otro lado, la pista resultante de la utilización del filtro de fase no lineal presenta cambios apreciables. En el estribillo, cuando canta \emph{"(...) who we are"} y aparecen los coros, éstos se encuentran más distanciados de la voz principal que la original. Así, resulta en un efecto de \emph{canon} en vez de un coro o eco que era lo que se oye en la pista original.
+	
+	
+	\subsection{Audio 2: \emph{Música clásica}}
+		
+	No parece haber mayores diferencias entre la original y las distintas compensaciones.
+		
+	\subsection{Audio 3: \emph{Beggar's Dance - Jinjer}}
+	
+%	Extraño. Para el FLG, se escucha un realce de bajos sutil. Con el iir, la voz de la cantante sale del plano central (al haber distorsión de fase, debe perder energía el conjunto de tónicas y armónicas que componen la voz). En este caso, el filtro por cuadrados mínimos me pareció el más acertado. El sistema electroacústico parece sólo a ver afectado el bajo, la pandereta y la voz. Tal vez el redoblante un poco. Lo hace menos medioso (ecualización en V), más nazal.
+	En este caso el sistema electroacústico parece afectar sólo al bajo, pandereta (tal vez el redoblante) y voz, sonando más nazal debiendose posiblemente a la disminusión de la banda media de frecuencias. En cuanto a los filtros, el comportamiento es similar al del primer audio. Los de fase lineal se asemejan al original, en particular el de ventaneo tiene un realce de bajos sutil en mi opinión siendo mejor el de cuadrados mínimos, mientras que el de fase no lineal pierde fidelidad. Con el filtro \emph{IIR} pareciera que la voz de la cantante sale del plano central y ésto se puede deber a que la distorsion de fase haga que la tónica y sus armónicas no lleguen al mismo tiempo, perdiendo energía y así su presencia en la mezcla final.
+			
+	\subsection{Audio 4: \emph{Symphony X - Serpent's Kiss}}
+	
+	Nuevamente, el sistema parece hacer menos mediosa la mezcla. El filtro \emph{IIR} no ecualiza del todo bien. Le faltan subir medios. El FLG sube un poco de más los medios (se escucha con que las guitarras están un poco más 'adelante'). El original tiene como ggr la guitarra, el flg lo tiene más mrr, iir está apagada la guitarra y el de cuadrados mínimos es más ffr (espero mica que tenga sentido lo que digo). El de cuadrados mínimos queda un poquito corto con los medios.
+
+				
+	\subsection{Audio 5: \emph{Game of Thrones Intro}}
+	
+	De vuelta, el \emph{IIR} lo deja apagado. Ahora vuelve a aparecer el efecto de Get Lucky pero con los violines de la sección intermedia. También resalta al chelo inicial. Después, el FLG y el de cuadrados mínimos no tienen mayores diferencias.
+
+	\subsection{Breve conclusión del análisis empírico de los filtros}
+
+	Las diferencias entre los filtros se suponen deben ser: debido a la ecualización especial del tema (como en la pista 4) o por efectos de post producción como los delays y overdubbs de las canciones más pop. Cuando se encuentran temas con varios instrumentos generando los efectos de forma natural, la distorsión de fase no pareciera ser muy apreciable exceptuando el caso del \emph{IIR} que parece descompensar las frecuencias medias bajandolas levemente, haciendo que todo sea más chato (pero no plano de $|H|=1$ si no de falta de protagonismo).
